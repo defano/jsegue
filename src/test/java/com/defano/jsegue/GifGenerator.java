@@ -18,6 +18,7 @@ public class GifGenerator {
             e.start("doc/images/" + thisName + ".gif");
             e.setDelay(1000 / 15);   // 15 frames per sec
             e.setTransparent(Color.BLACK);
+            e.setRepeat(0);
 
             forward(thisName, e);
         }
