@@ -56,8 +56,8 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
         }
 
         effect = SegueBuilder.of(name)
-                .withSource(getSrc(image.getWidth(), image.getHeight()))
-                .withDestination(getDest(image.getWidth(), image.getHeight()))
+                .withSource(getBlueCircle(image.getWidth(), image.getHeight()))
+                .withDestination(getYellowRect(image.getWidth(), image.getHeight()))
                 .withDuration(1000, TimeUnit.MILLISECONDS)
                 .withMaxFramesPerSecond(30)
                 .withAnimationObserver(this)
@@ -68,7 +68,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
         effect.start();
     }
 
-    private BufferedImage getSrc(int width, int height) {
+    public static BufferedImage getBlueCircle(int width, int height) {
         BufferedImage src = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = src.createGraphics();
         g.setPaint(Color.BLUE);
@@ -78,7 +78,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
         return src;
     }
 
-    private BufferedImage getDest(int width, int height) {
+    public static BufferedImage getYellowRect(int width, int height) {
         BufferedImage src = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = src.createGraphics();
         g.setPaint(Color.YELLOW);

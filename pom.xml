@@ -19,6 +19,14 @@
             <artifactId>javac2</artifactId>
             <version>7.0.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>animated-gif-lib</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

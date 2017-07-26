@@ -13,30 +13,30 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 
 | Effect | Name           | Description
 |-|-----------------------|--------------------------
-| | `DISSOLVE`            | Cross-dissolve from source to destination.
-| | `CHECKERBOARD`        | Destination image appears over the source in a 8x8 matrix.
-| | `VENETIAN_BLINDS`     | Destination appears in "louvered" horizontal stripes.
-| | `SCROLL_LEFT`         | Scroll from right to left.
-| | `SCROLL_RIGHT`        | Scroll from left to right.
-| | `SCROLL_UP`           | Scroll from bottom to top.
-| | `SCROLL_DOWN`         | Scroll from top to bottom.
-| | `WIPE_LEFT`           | Slides the destination image over the source from right to left.
-| | `WIPE_RIGHT`          | Slides the destination image over the source from left to right.
-| | `WIPE_UP`             | Slides the destination image over the source from bottom to top.
-| | `WIPE_DOWN`           | Slides the destination image over the source from top to bottom.
-| | `ZOOM_OUT`            | The destination image expands over the source in a rectangle aperture.
-| | `ZOOM_IN`             | The source image collapses over the destination in a rectangle aperture.
-| | `IRIS_OPEN`           | The destination image expands over the source in a circular aperture.
-| | `IRIS_CLOSE`          | The source image collapses over the destination in a circular aperture.
-| | `BARN_DOOR_OPEN`      | The source image is split horizontally and each side slides out left/right to expose the destination.
-| | `BARN_DOOR_CLOSE`     | The destination image slides in the from the left/right obscuring the source image.
-| | `SHRINK_TO_BOTTOM`    | The source image shrinks downward exposing the destination.
-| | `SHRINK_TO_TOP`       | The source image shrinks upward exposing the destination.
-| | `SHRINK_TO_CENTER`    | The source image shrinks from the center of the screen exposing the destination.
-| | `STRETCH_FROM_BOTTOM` | The destination image grows from the bottom obscuring the source underneath it.
-| | `STRETCH_FROM_TOP`    | The destination image grows from the top obscuring the source underneath it.
-| | `STRETCH_FROM_CENTER` | The destination image grows from the center of the screen obscuring the source underneath it.
-| | `PLAIN`               | A no-op transition that simply renders the source image.
+|![DISSOLVE](doc/images/DISSOLVE.gif)| `DISSOLVE`            | Cross-dissolve from source to destination.
+|![CHECKERBOARD](doc/images/CHECKERBOARD.gif)| `CHECKERBOARD`        | Destination image appears over the source in a 8x8 matrix.
+|![VENETIAN_BLINDS](doc/images/VENETIAN_BLINDS.gif)| `VENETIAN_BLINDS`     | Destination appears in "louvered" horizontal stripes.
+|![SCROLL_LEFT](doc/images/SCROLL_LEFT.gif)| `SCROLL_LEFT`         | Scroll from right to left.
+|![SCROLL_RIGHT](doc/images/SCROLL_RIGHT.gif)| `SCROLL_RIGHT`        | Scroll from left to right.
+|![SCROLL_UP](doc/images/SCROLL_UP.gif)| `SCROLL_UP`           | Scroll from bottom to top.
+|![SCROLL_DOWN](doc/images/SCROLL_DOWN.gif)| `SCROLL_DOWN`         | Scroll from top to bottom.
+|![WIPE_LEFT](doc/images/WIPE_LEFT.gif)| `WIPE_LEFT`           | Slides the destination image over the source from right to left.
+|![WIPE_RIGHT](doc/images/WIPE_RIGHT.gif)| `WIPE_RIGHT`          | Slides the destination image over the source from left to right.
+|![WIPE_UP](doc/images/WIPE_UP.gif)| `WIPE_UP`             | Slides the destination image over the source from bottom to top.
+|![WIPE_DOWN](doc/images/WIPE_DOWN.gif)| `WIPE_DOWN`           | Slides the destination image over the source from top to bottom.
+|![ZOOM_OUT](doc/images/ZOOM_OUT.gif)| `ZOOM_OUT`            | The destination image expands over the source in a rectangle aperture.
+|![ZOOM_IN](doc/images/ZOOM_IN.gif)| `ZOOM_IN`             | The source image collapses over the destination in a rectangle aperture.
+|![IRIS_OPEN](doc/images/IRIS_OPEN.gif)| `IRIS_OPEN`           | The destination image expands over the source in a circular aperture.
+|![IRIS_CLOSE](doc/images/IRIS_CLOSE.gif)| `IRIS_CLOSE`          | The source image collapses over the destination in a circular aperture.
+|![BARN_DOOR_OPEN](doc/images/BARN_DOOR_OPEN.gif)| `BARN_DOOR_OPEN`      | The source image is split horizontally and each side slides out left/right to expose the destination.
+|![BARN_DOOR_CLOSE](doc/images/BARN_DOOR_CLOSE.gif)| `BARN_DOOR_CLOSE`     | The destination image slides in the from the left/right obscuring the source image.
+|![SHRINK_TO_BOTTOM](doc/images/SHRINK_TO_BOTTOM.gif)| `SHRINK_TO_BOTTOM`    | The source image shrinks downward exposing the destination.
+|![SHRINK_TO_TOP](doc/images/SHRINK_TO_TOP.gif)| `SHRINK_TO_TOP`       | The source image shrinks upward exposing the destination.
+|![SHRINK_TO_CENTER](doc/images/SHRINK_TO_CENTER.gif)| `SHRINK_TO_CENTER`    | The source image shrinks from the center of the screen exposing the destination.
+|![STRETCH_FROM_BOTTOM](doc/images/STRETCH_FROM_BOTTOM.gif)| `STRETCH_FROM_BOTTOM` | The destination image grows from the bottom obscuring the source underneath it.
+|![STRETCH_FROM_TOP](doc/images/STRETCH_FROM_TOP.gif)| `STRETCH_FROM_TOP`    | The destination image grows from the top obscuring the source underneath it.
+|![STRETCH_FROM_CENTER](doc/images/STRETCH_FROM_CENTER.gif)| `STRETCH_FROM_CENTER` | The destination image grows from the center of the screen obscuring the source underneath it.
+|![PLAIN](doc/images/PLAIN.gif)| `PLAIN`               | A no-op transition that simply renders the source image.
 
 ## Getting Started
 
