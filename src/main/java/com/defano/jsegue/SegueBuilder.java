@@ -161,7 +161,7 @@ public class SegueBuilder {
                 return new ShrinkToBottomEffect();
             case SHRINK_TO_TOP:
                 return new ShrinkToTopEffect();
-            case SHRING_TO_CENTER:
+            case SHRINK_TO_CENTER:
                 return new ShrinkToCenterEffect();
             case VENETIAN_BLINDS:
                 return new BlindsEffect();
