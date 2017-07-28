@@ -17,7 +17,7 @@ public class SegueBuilder {
     private Paint destinationPaint;
     private int maxFps = 30;
     private int durationMs = 1500;
-    private boolean blend = false;
+    private boolean overlay = false;
     private Set<SegueAnimationObserver> animationObservers = new HashSet<>();
     private Set<SegueCompletionObserver> completionObservers = new HashSet<>();
 
@@ -64,8 +64,8 @@ public class SegueBuilder {
         return this;
     }
 
-    public SegueBuilder alphaBlend(boolean alphaBlend) {
-        this.blend = alphaBlend;
+    public SegueBuilder overlay(boolean overlayDestination) {
+        this.overlay = overlayDestination;
         return this;
     }
 
@@ -110,7 +110,7 @@ public class SegueBuilder {
         effect.setDestination(theDestination);
         effect.setDurationMs(durationMs);
         effect.setFps(maxFps);
-        effect.setOverlay(blend);
+        effect.setOverlay(overlay);
         effect.addAnimationObservers(animationObservers);
         effect.addCompletionObservers(completionObservers);
 

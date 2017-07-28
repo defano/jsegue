@@ -130,11 +130,11 @@ SegueBuilder.of(SegueName.ZOOM_IN)
   .build();
 ```
 
-#### What does the `alphaBlend` option do?
+#### What does the `overlay` option do?
 
-First, it has no effect if both images contain no areas of translucency. Otherwise, when true, the source and destination images will be alpha composited together. When false, both images are treated (effectively) as fully opaque; the bounds of one image will obscure the the other as the animation progresses.
+First, it has no effect if both images contain no areas of translucency. Otherwise, when true, the source and destination images will be alpha composited together. When false, the destination image is generally treated as fully opaque; the bounds of the destination will obscure the the other as the animation progresses. The exact impact of this property differs across segue animations and has no affect at all on some.
 
-Which looks best is a matter of preference (as well as the composition of the source and destination images).
+Which looks best is a matter of preference (as well as the composition of the source and destination images). Note that the animations shown in the table above were created with overlay on.
 
 #### Do my source and destination images have to be the same size?
 
@@ -148,7 +148,7 @@ Yes, but... This library does not manage segue sequences for you. But you can ac
 
 ```
 SegueBuilder.of(SegueName.ZOOM_IN)
-  .withSource(Color.TRANSLUCENT)
+  .withSource(new Color(0, 0, 0, 0))    // Fully transparent
   .withDestination(myImage)
   .withCompletionObserver(segue -> startNextSegueInSequence())
   ...

@@ -62,7 +62,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
                 .withMaxFramesPerSecond(30)
                 .withAnimationObserver(this)
                 .withCompletionObserver(this)
-                .alphaBlend(blend.isSelected())
+                .overlay(blend.isSelected())
                 .build();
 
         effect.start();
