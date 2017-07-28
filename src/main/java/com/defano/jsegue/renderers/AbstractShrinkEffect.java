@@ -17,6 +17,7 @@ public class AbstractShrinkEffect extends AnimatedSegue {
         this.direction = direction;
     }
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
         BufferedImage frame = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -34,7 +35,7 @@ public class AbstractShrinkEffect extends AnimatedSegue {
         Graphics2D rg = resized.createGraphics();
 
         rg.drawImage(src, 0, 0, resized.getWidth(), resized.getHeight(), null);
-        if (!isBlend()) {
+        if (!isOverlay()) {
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
         }
 

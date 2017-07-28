@@ -5,10 +5,14 @@ import com.defano.jsegue.AnimatedSegue;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Destination appears in "louvered" horizontal stripes.
+ */
 public class BlindsEffect extends AnimatedSegue {
 
     private int louverCount = 12;
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
         BufferedImage frame = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -28,7 +32,7 @@ public class BlindsEffect extends AnimatedSegue {
 
             Graphics2D lg = louver.createGraphics();
 
-            if (!isBlend()) {
+            if (!isOverlay()) {
                 // Remove louver opening from src image
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT));
                 g.fillRect(0, y, dst.getWidth(), thisLouverHeight);

@@ -6,8 +6,12 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+/**
+ * The source image is split horizontally and each side slides out left/right to expose the destination.
+ */
 public class BarnDoorOpenEffect extends AnimatedSegue {
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
         BufferedImage frame = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);

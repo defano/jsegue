@@ -23,6 +23,7 @@ public abstract class AbstractZoomEffect extends AnimatedSegue {
         this.shape = shape;
     }
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
         int diagonal = (int) (Math.sqrt(Math.pow(src.getHeight(), 2) + Math.pow(src.getWidth(), 2)));
@@ -40,7 +41,7 @@ public abstract class AbstractZoomEffect extends AnimatedSegue {
 
         g.drawImage(src, 0, 0, null);
 
-        if (!isBlend()) {
+        if (!isOverlay()) {
             // Cut the Iris out of the from image (leave a transparent hole) and draw it onto the frame
             maskZoomRegion(g, src.getWidth(), src.getHeight(), radius, AlphaComposite.getInstance(AlphaComposite.DST_OUT));
         }

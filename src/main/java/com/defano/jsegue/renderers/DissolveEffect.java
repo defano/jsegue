@@ -5,8 +5,12 @@ import com.defano.jsegue.AnimatedSegue;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Cross-dissolve from source to destination.
+ */
 public class DissolveEffect extends AnimatedSegue {
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
 

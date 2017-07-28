@@ -5,8 +5,12 @@ import com.defano.jsegue.AnimatedSegue;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * The destination image grows from the bottom obscuring the source underneath it.
+ */
 public class StretchFromBottomEffect extends AnimatedSegue {
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
         BufferedImage frame = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -23,7 +27,7 @@ public class StretchFromBottomEffect extends AnimatedSegue {
         BufferedImage resized = new BufferedImage(dst.getWidth(), stretchDistance, BufferedImage.TYPE_INT_ARGB);
         Graphics2D rg = resized.createGraphics();
 
-        if (!isBlend()) {
+        if (!isOverlay()) {
             // Remove stretched region from from image
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT));
             g.fillRect(0, dst.getHeight() - resized.getHeight(), resized.getWidth(), resized.getHeight());

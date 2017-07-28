@@ -6,8 +6,12 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+/**
+ * Slides the destination image over the source from left to right.
+ */
 public class WipeRightEffect extends AnimatedSegue {
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
         BufferedImage frame = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -16,7 +20,7 @@ public class WipeRightEffect extends AnimatedSegue {
         // Calculate wipe distance
         int distance = (int) (progress * src.getWidth());
 
-        if (!isBlend()) {
+        if (!isOverlay()) {
             // Truncate the from image (it's getting wiped)
             BufferedImage wiped = src.getSubimage(distance, 0, src.getWidth() - distance, src.getHeight());
             g.drawImage(wiped, distance, 0, null);

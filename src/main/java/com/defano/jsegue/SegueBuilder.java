@@ -106,11 +106,11 @@ public class SegueBuilder {
         }
 
         AnimatedSegue effect = getEffect(name);
-        effect.setFrom(theSource);
-        effect.setTo(theDestination);
+        effect.setSource(theSource);
+        effect.setDestination(theDestination);
         effect.setDurationMs(durationMs);
         effect.setFps(maxFps);
-        effect.setBlend(blend);
+        effect.setOverlay(blend);
         effect.addAnimationObservers(animationObservers);
         effect.addCompletionObservers(completionObservers);
 
@@ -150,7 +150,7 @@ public class SegueBuilder {
             case ZOOM_OUT:
                 return new ZoomOutEffect();
             case PLAIN:
-                return new FreezeEffect();
+                return new PlainEffect();
             case STRETCH_FROM_TOP:
                 return new StretchFromTopEffect();
             case STRETCH_FROM_BOTTOM:

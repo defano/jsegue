@@ -5,10 +5,14 @@ import com.defano.jsegue.AnimatedSegue;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Destination image appears over the source in a 8x8 matrix.
+ */
 public class CheckerboardEffect extends AnimatedSegue {
 
     private int checkerboardSize = 8;
 
+    /** {@inheritDoc} */
     @Override
     public BufferedImage render(BufferedImage src, BufferedImage dst, float progress) {
 
@@ -50,7 +54,7 @@ public class CheckerboardEffect extends AnimatedSegue {
                 BufferedImage square = dst.getSubimage(x, y, thisSquareWidth, thisSquareHeight);
                 Graphics2D lg = square.createGraphics();
 
-                if (!isBlend()) {
+                if (!isOverlay()) {
                     // Remove square from src
                     g.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT));
                     g.fillRect(x, y, thisSquareWidth, thisSquareHeight);

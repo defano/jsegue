@@ -57,7 +57,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
 
         effect = SegueBuilder.of(name)
                 .withSource(getBlueCircle(image.getWidth(), image.getHeight()))
-                .withDestination(getYellowRect(image.getWidth(), image.getHeight()))
+                .withDestination(getOrangeRect(image.getWidth(), image.getHeight()))
                 .withDuration(1000, TimeUnit.MILLISECONDS)
                 .withMaxFramesPerSecond(30)
                 .withAnimationObserver(this)
@@ -71,17 +71,17 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
     public static BufferedImage getBlueCircle(int width, int height) {
         BufferedImage src = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = src.createGraphics();
-        g.setPaint(Color.BLUE);
+        g.setPaint(new Color(10,53,150));
         g.fillOval(0, 0, (int) (width * .75), (int) (height * .75));
         g.dispose();
 
         return src;
     }
 
-    public static BufferedImage getYellowRect(int width, int height) {
+    public static BufferedImage getOrangeRect(int width, int height) {
         BufferedImage src = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = src.createGraphics();
-        g.setPaint(Color.YELLOW);
+        g.setPaint(new Color(235,111,46));
         g.fillRect((int) (width * .25), (int) (height * .25), (int) (width * .75), (int) (height * .75));
         g.dispose();
 
@@ -89,17 +89,17 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
     }
 
     @Override
-    public void onSegueAnimationCompleted(AnimatedSegue effect) {
-        BufferedImage to = effect.getFrom();
-        BufferedImage from = effect.getTo();
+    public void onSegueAnimationCompleted(AnimatedSegue segue) {
+        BufferedImage to = segue.getSource();
+        BufferedImage from = segue.getDestination();
 
-        effect.setTo(to);
-        effect.setFrom(from);
-        effect.start();
+        segue.setDestination(to);
+        segue.setSource(from);
+        segue.start();
     }
 
     @Override
-    public void onFrameRendered(BufferedImage image) {
+    public void onFrameRendered(AnimatedSegue segue, BufferedImage image) {
         this.image.setIcon(new ImageIcon(image));
         this.image.repaint();
     }
