@@ -1,5 +1,8 @@
 package com.defano.jsegue;
 
+/**
+ * An enumeration of animated segues.
+ */
 public enum SegueName {
     DISSOLVE,
     BARN_DOOR_OPEN,

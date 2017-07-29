@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * A builder of animated image segues.
+ */
 public class SegueBuilder {
 
     private final SegueName name;
@@ -25,60 +28,146 @@ public class SegueBuilder {
         this.name = name;
     }
 
+    /**
+     * Create a segue builder for the specified segue name.
+     * @param name The name of the effect to build.
+     * @return The builder for this segue
+     */
     public static SegueBuilder of (SegueName name) {
         return new SegueBuilder(name);
     }
 
+    /**
+     * Set the source image for this segue.
+     *
+     * If the dimensions of this image do no match that of the destination, the image may be resized to match
+     * the larger height/width.
+     * @param src The source image
+     * @return This builder object
+     */
     public SegueBuilder withSource (BufferedImage src) {
         this.source = src;
         return this;
     }
 
+    /**
+     * Set the destination image for this segue.
+     *
+     * If the dimensions of this image do no match that of the destination, the image may be resized to match
+     * the larger height/width.
+     * @param dst The destination image
+     * @return This builder object
+     */
     public SegueBuilder withDestination(BufferedImage dst) {
         this.destination = dst;
         return this;
     }
 
+    /**
+     * Sets a "paint" source image. May be a solid color, or any Paint subclass including textured paint or gradients.
+     * Note that only the source or the destination may be a paint; both cannot be paint.
+     *
+     * @param paint The paint to use as the source image.
+     * @return This builder object
+     */
     public SegueBuilder withSource(Paint paint) {
         this.sourcePaint = paint;
         return this;
     }
 
+    /**
+     * Sets a "paint" destination image. May be a solid color, or any Paint subclass including textured paint or gradients.
+     * Note that only the source or the destination may be a paint; both cannot be paint.
+     *
+     * @param paint The paint to use as the destination image
+     * @return This builder object
+     */
     public SegueBuilder withDestination(Paint paint) {
         this.destinationPaint = paint;
         return this;
     }
 
+    /**
+     * Sets the maximum number of frames that will be rendered in each second. Note that this specifies only a cap;
+     * during real-time animation execution the system may not achieve this rate. Also note that a minimum of three
+     * frames are always guaranteed to be created irrespective of this value or duration.
+     *
+     * See {@link AnimatedSegue#setFps(int)}
+     *
+     * @param maxFps Maximum number of frames per second
+     * @return This builder object
+     */
     public SegueBuilder withMaxFramesPerSecond(int maxFps) {
         this.maxFps = maxFps;
         return this;
     }
 
+    /**
+     * Sets the duration of this animation, in milliseconds.
+     *
+     * See{@link AnimatedSegue#setDurationMs(int)}
+     * @param durationMs The duration of the animation, in milliseconds.
+     * @return This builder object
+     */
     public SegueBuilder withDurationMs(int durationMs) {
         this.durationMs = durationMs;
         return this;
     }
 
+    /**
+     * Sets the duration of this animation, in user-provided units.
+     *
+     * @param duration The duration of this animation
+     * @param unit The units of time that duration is measured in
+     * @return This builder object
+     */
     public SegueBuilder withDuration(int duration, TimeUnit unit) {
         this.durationMs = (int) unit.toMillis(duration);
         return this;
     }
 
+    /**
+     * Enables or disables alpha overlay mode in the renderers.
+     *
+     * See {@link AnimatedSegue#setOverlay(boolean)}.
+     * @param overlayDestination True to enable overlay; false to disable.
+     * @return This builder object.
+     */
     public SegueBuilder overlay(boolean overlayDestination) {
         this.overlay = overlayDestination;
         return this;
     }
 
+    /**
+     * Adds an observer of animation frame generation (invoked each time a new frame is rendered).
+     * @param observer The observer
+     * @return This builder object
+     */
     public SegueBuilder withAnimationObserver(SegueAnimationObserver observer) {
         this.animationObservers.add(observer);
         return this;
     }
 
+    /**
+     * Adds an observer of animation completion (invoked when animation is finished)
+     * @param observer The observer
+     * @return This builder object
+     */
     public SegueBuilder withCompletionObserver(SegueCompletionObserver observer) {
         this.completionObservers.add(observer);
         return this;
     }
 
+    /**
+     * Builds an animated segue based on the values provided to the builder.
+     * <p>
+     * Note these limitations:
+     * - A source and destination must be provided.
+     * - Either the source or the destination must be a BufferedImage (cant use two Paints)
+     * - If the images are not the same size, they will be resized to the larger dimension.
+     *
+     * @return The animated segue.
+     */
     public AnimatedSegue build() {
         if (sourcePaint == null && source == null) {
             throw new IllegalArgumentException("Must specify a source before building.");

@@ -42,7 +42,7 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 
 #### 1. Install the library:
 
-JSegue will soon be published to Maven Central; include the library in your Maven project's POM, like:
+JSegue is published to Maven Central; include the library in your Maven project's POM, like:
 
 ```
 <dependency>
@@ -76,7 +76,7 @@ public class MyClass implements SegueAnimationObserver {
   ...
 
   @Override
-  void onFrameRendered(BufferedImage image) {
+  void onFrameRendered(AnimatedSegue segue, BufferedImage image) {
     myDisplay.setIcon(new ImageIcon(image));
   }  
 
@@ -124,7 +124,7 @@ Or, to make an image appear using a zoom effect:
 
 ```
 SegueBuilder.of(SegueName.ZOOM_IN)
-  .withSource(Color.TRANSLUCENT)
+  .withSource(new Color(0, 0, 0, 0))     // Transparent color
   .withDestination(myImage)
   ...
   .build();
