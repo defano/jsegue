@@ -1,0 +1,16 @@
+language: java
+
+jdk:
+- oraclejdk8
+
+install: true
+
+env:
+  global:
+    secure: "JY/1UxUAeyE3ftF9VfK0WBF8VG2oYzxI5mlIxCR3JU4ilxLZdyXBcFp7Sg6i0Eo2v1sYw9ueVEaEDrdw4aWPV9jWgVdijE4txOtTyhbjRgMxdun0I0txD3T0ccrg1M0Luq98n9MYuTEKkjEuXb1aiEuJ9TJQy+uJ4CZtMaS949yAvJUy3fa9ZkT54ekrW1MMQBeD90jpjLyrs8M1Wps1GDH55yENOXGI3f59ZvFl+V2r49G5wohFA05OxUK4IQ1TJDBkSxw9UZzDrgwrzl6zwDz8YntTskT5Z9oRAj7oE/CA2BN9w7JAooeBZALSgzmQ2dDPoYknFfRMsVCVFv2lJNIhT4UlpJ4M617l0Lg6S9teiNlIKjb9mGkcCxkQJlvHJ4QpKzTa4yX86BrZrNy2Y1ICWNMjRkwW0rTPaMJ/UoKkzcpearzZMZpHsiWKArj5+26jFlfFcChdxrytvpFnepIrhPBJ/UeEzXyWr2O/bMujpP+59BXkBI0ovN/Geha+uAsZVNSDRKcyCVZHX1D7nzFKD0H9v3/LZCKc0xNxZKgOCzbBWWAOfdUZez7L0vLVTcryEQAD3yByw0rDiAaHRS6AU7lqxQqxMK3KOpF+ZlUx3hypwnV+8MJPIZDIiibi6/x9cuoYWkqGSTWK+JeSUM9uHyq2UJqhQNCMqJPQm+o="
+
+script: mvn test javadoc:javadoc
+
+after_success:
+- chmod +x .travis/push-javadocs.sh
+- ".travis/push-javadocs.sh"
