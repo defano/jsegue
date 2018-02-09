@@ -2,6 +2,8 @@
 
 A Java library of animated image-to-image transitions useful for slide shows, photo montages, UI transitions and the like.
 
+[![Build Status](https://travis-ci.org/defano/jsegue.svg?branch=master)](https://travis-ci.org/defano/jsegue)
+
 ## Features
 
 * 23 animations for transitioning one image to another including cross-dissolve, wipe, scroll, zoom, and checkerboard effects. May be used to generate realtime animations or to render frames offline (in batch).
