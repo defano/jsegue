@@ -24,6 +24,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
         new JSegueDemo();
     }
 
+    @SuppressWarnings("unchecked")
     public JSegueDemo() {
         frame = new JFrame("JSegue Demo");
         frame.setLayout(new BorderLayout());
@@ -41,9 +42,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
             run((SegueName) effectSelection.getSelectedItem());
         });
 
-        blend.addActionListener(e -> {
-            run(name);
-        });
+        blend.addActionListener(e -> run(name));
 
         run(SegueName.DISSOLVE);
     }
@@ -71,7 +70,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
     public static BufferedImage getBlueCircle(int width, int height) {
         BufferedImage src = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = src.createGraphics();
-        g.setPaint(new Color(10,53,150));
+        g.setPaint(new Color(10, 53, 150));
         g.fillOval(0, 0, (int) (width * .75), (int) (height * .75));
         g.dispose();
 
@@ -81,7 +80,7 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
     public static BufferedImage getOrangeRect(int width, int height) {
         BufferedImage src = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = src.createGraphics();
-        g.setPaint(new Color(235,111,46));
+        g.setPaint(new Color(235, 111, 46));
         g.fillRect((int) (width * .25), (int) (height * .25), (int) (width * .75), (int) (height * .75));
         g.dispose();
 

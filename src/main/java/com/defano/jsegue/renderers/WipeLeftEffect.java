@@ -19,7 +19,7 @@ public class WipeLeftEffect extends AnimatedSegue {
         Graphics2D g = frame.createGraphics();
 
         // Calculate wipe distance
-        int distance = (int) (progress * src.getWidth());
+        int distance = Math.min(src.getWidth() - 1, (int) (progress * src.getWidth()));
 
         if (!isOverlay()) {
             // Truncate the from image (it's getting wiped)

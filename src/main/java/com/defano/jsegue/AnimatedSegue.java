@@ -6,23 +6,35 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Abstract base class representing an animated image segue.
  */
+@SuppressWarnings("unused")
 public abstract class AnimatedSegue {
+
+    private final Set<SegueAnimationObserver> animationObserver = new HashSet<>();
+    private final Set<SegueCompletionObserver> completionObserver = new HashSet<>();
+    private int durationMs = 1000;
+    private int fps = 30;
+    private boolean isOverlay = false;
+    private ScheduledExecutorService animatorService;
+    private long startTime;
+    private BufferedImage source;
+    private BufferedImage destination;
 
     /**
      * Renders a frame in the segue animation. The animator will invoke this method repeatedly at a frequency and
      * count determined by FPS and duration.
-     *
+     * <p>
      * Note that every animation sequence starts with a call to this method using progress = 0.0f and ends with
      * a call using progress = 1.0f. Thus, irrespective of FPS or duration, every animation will always have at least
      * two frames.
      *
-     * @param src The source image; guaranteed to be the same dimensions as dst.
-     * @param dst The destination image; guaranteed to be the same dimensions as src.
+     * @param src      The source image; guaranteed to be the same dimensions as dst.
+     * @param dst      The destination image; guaranteed to be the same dimensions as src.
      * @param progress A value between 0.0 and 1.0 (inclusive) representing the a location in the segue sequence the
      *                 frame should be drawn.
      * @return A BufferedImage representing the frame at this location in the sequence; should be the same dimensions
@@ -30,23 +42,13 @@ public abstract class AnimatedSegue {
      */
     public abstract BufferedImage render(BufferedImage src, BufferedImage dst, float progress);
 
-    private final Set<SegueAnimationObserver> animationObserver = new HashSet<>();
-    private final Set<SegueCompletionObserver> completionObserver = new HashSet<>();
-
-    private int durationMs = 1000;
-    private int fps = 30;
-    private boolean isOverlay = false;
-
-    private ScheduledExecutorService animatorService;
-    private long startTime;
-    private BufferedImage source;
-    private BufferedImage destination;
-
     /**
      * Begin animating this segue using the provided source and destination images; max frames per second, and
      * alpha isOverlay mode.
+     *
+     * @return ScheduledFuture representing the future completion of the animation sequence
      */
-    public void start() {
+    public ScheduledFuture<?> start() {
         startTime = System.currentTimeMillis();
 
         // Assure that 0 is always first render progress percent
@@ -60,7 +62,7 @@ public abstract class AnimatedSegue {
 
         // Invoke the renderer at a fixed rate
         animatorService = Executors.newSingleThreadScheduledExecutor();
-        animatorService.scheduleAtFixedRate(() -> {
+        return animatorService.scheduleAtFixedRate(() -> {
             if (getProgress() < 1.0f) {
                 assertImages();
                 fireFrameRendered(AnimatedSegue.this.render(source, destination, getProgress()));
@@ -84,7 +86,17 @@ public abstract class AnimatedSegue {
     }
 
     /**
+     * Determines whether this animation is running.
+     *
+     * @return True if animation is in progress; false otherwise.
+     */
+    public boolean isRunning() {
+        return animatorService == null || animatorService.isTerminated();
+    }
+
+    /**
      * Adds an observer of animation completion events (fires each time this segue completes its animation sequence).
+     *
      * @param observer The observer destination be notified on animation completion.
      */
     public void addCompletionObserver(SegueCompletionObserver observer) {
@@ -93,6 +105,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Adds a collection of observers of animation completion events.
+     *
      * @param observers The observers destination be added.
      */
     public void addCompletionObservers(Collection<SegueCompletionObserver> observers) {
@@ -101,6 +114,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Adds an observer of animation frame events (fires each time a new frame has been rendered in the animation.)
+     *
      * @param observer The observer of animation frame events.
      */
     public void addAnimationObserver(SegueAnimationObserver observer) {
@@ -109,6 +123,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Adds a collection of animation frame event observers.
+     *
      * @param observers The observers.
      */
     public void addAnimationObservers(Collection<SegueAnimationObserver> observers) {
@@ -137,6 +152,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Returns the duration of this animation in millisecoonds.
+     *
      * @return The duration.
      */
     public int getDurationMs() {
@@ -145,6 +161,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Sets the desired duration of this animation, in milliseconds.
+     *
      * @param durationMs The desired duration.
      */
     public void setDurationMs(int durationMs) {
@@ -153,6 +170,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Gets the source image in the animation.
+     *
      * @return The source image.
      */
     public BufferedImage getSource() {
@@ -161,6 +179,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Sets the source image in the animation.
+     *
      * @param source The source image
      */
     public void setSource(BufferedImage source) {
@@ -169,6 +188,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Gets the destination image in the animation.
+     *
      * @return The destination image.
      */
     public BufferedImage getDestination() {
@@ -177,6 +197,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Sets the destination image.
+     *
      * @param destination The destination image.
      */
     public void setDestination(BufferedImage destination) {
@@ -185,6 +206,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Gets the maximum frames per second this animation will produce.
+     *
      * @return The max FPS.
      */
     public int getFps() {
@@ -205,7 +227,7 @@ public abstract class AnimatedSegue {
     /**
      * Determines if overlay is enabled. In general, when overlay is turned off, the destination image is treated
      * effectively as opaque and its bounds fully obscure the source even if all or a portion of it is translucent.
-     *
+     * <p>
      * The actual effect this has on animation differs based on the specific renderer.
      *
      * @return True if overlay is enabled; false otherwise.
@@ -216,6 +238,7 @@ public abstract class AnimatedSegue {
 
     /**
      * Sets whether or not overlay is enabled. See {@link #isOverlay()} for a description of overlay.
+     *
      * @param isOverlay Whether overlays should be enabled.
      */
     public void setOverlay(boolean isOverlay) {
@@ -235,7 +258,7 @@ public abstract class AnimatedSegue {
     }
 
     private float getProgress() {
-        float progress = ((float)(System.currentTimeMillis() - startTime) / (float) durationMs);
+        float progress = ((float) (System.currentTimeMillis() - startTime) / (float) durationMs);
         return progress < 0f ? 0f : progress > 1.0f ? 1.0f : progress;
     }
 

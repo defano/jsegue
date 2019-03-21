@@ -18,7 +18,7 @@ public class WipeDownEffect extends AnimatedSegue {
         Graphics2D g = frame.createGraphics();
 
         // Calculate wipe distance
-        int distance = (int) (progress * src.getHeight());
+        int distance = Math.min(src.getHeight() -1, (int) (progress * src.getHeight()));
 
         if (!isOverlay()) {
             // Truncate the from image (it's getting wiped)
