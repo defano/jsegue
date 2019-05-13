@@ -1,7 +1,5 @@
 package com.defano.jsegue;
 
-import com.defano.jsegue.renderers.*;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
@@ -11,9 +9,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * A builder of animated image segues.
  */
+@SuppressWarnings("unused")
 public class SegueBuilder {
 
-    private final SegueName name;
+    private Class<? extends AnimatedSegue> segue;
     private BufferedImage source;
     private BufferedImage destination;
     private Paint sourcePaint;
@@ -24,37 +23,40 @@ public class SegueBuilder {
     private Set<SegueAnimationObserver> animationObservers = new HashSet<>();
     private Set<SegueCompletionObserver> completionObservers = new HashSet<>();
 
-    private SegueBuilder(SegueName name) {
-        this.name = name;
+    private SegueBuilder(Class<? extends AnimatedSegue> segue) {
+        this.segue = segue;
     }
 
     /**
      * Create a segue builder for the specified segue name.
-     * @param name The name of the effect to build.
+     *
+     * @param seque The class of the effect to build.
      * @return The builder for this segue
      */
-    public static SegueBuilder of (SegueName name) {
-        return new SegueBuilder(name);
+    public static SegueBuilder of(Class<? extends AnimatedSegue> seque) {
+        return new SegueBuilder(seque);
     }
 
     /**
      * Set the source image for this segue.
-     *
+     * <p>
      * If the dimensions of this image do no match that of the destination, the image may be resized to match
      * the larger height/width.
+     *
      * @param src The source image
      * @return This builder object
      */
-    public SegueBuilder withSource (BufferedImage src) {
+    public SegueBuilder withSource(BufferedImage src) {
         this.source = src;
         return this;
     }
 
     /**
      * Set the destination image for this segue.
-     *
+     * <p>
      * If the dimensions of this image do no match that of the destination, the image may be resized to match
      * the larger height/width.
+     *
      * @param dst The destination image
      * @return This builder object
      */
@@ -91,7 +93,7 @@ public class SegueBuilder {
      * Sets the maximum number of frames that will be rendered in each second. Note that this specifies only a cap;
      * during real-time animation execution the system may not achieve this rate. Also note that a minimum of three
      * frames are always guaranteed to be created irrespective of this value or duration.
-     *
+     * <p>
      * See {@link AnimatedSegue#setFps(int)}
      *
      * @param maxFps Maximum number of frames per second
@@ -104,8 +106,9 @@ public class SegueBuilder {
 
     /**
      * Sets the duration of this animation, in milliseconds.
-     *
+     * <p>
      * See{@link AnimatedSegue#setDurationMs(int)}
+     *
      * @param durationMs The duration of the animation, in milliseconds.
      * @return This builder object
      */
@@ -118,7 +121,7 @@ public class SegueBuilder {
      * Sets the duration of this animation, in user-provided units.
      *
      * @param duration The duration of this animation
-     * @param unit The units of time that duration is measured in
+     * @param unit     The units of time that duration is measured in
      * @return This builder object
      */
     public SegueBuilder withDuration(int duration, TimeUnit unit) {
@@ -128,8 +131,9 @@ public class SegueBuilder {
 
     /**
      * Enables or disables alpha overlay mode in the renderers.
-     *
+     * <p>
      * See {@link AnimatedSegue#setOverlay(boolean)}.
+     *
      * @param overlayDestination True to enable overlay; false to disable.
      * @return This builder object.
      */
@@ -140,6 +144,7 @@ public class SegueBuilder {
 
     /**
      * Adds an observer of animation frame generation (invoked each time a new frame is rendered).
+     *
      * @param observer The observer
      * @return This builder object
      */
@@ -150,6 +155,7 @@ public class SegueBuilder {
 
     /**
      * Adds an observer of animation completion (invoked when animation is finished)
+     *
      * @param observer The observer
      * @return This builder object
      */
@@ -194,71 +200,19 @@ public class SegueBuilder {
             theDestination = enlargeImage(targetWidth, targetHeight, theDestination);
         }
 
-        AnimatedSegue effect = getEffect(name);
-        effect.setSource(theSource);
-        effect.setDestination(theDestination);
-        effect.setDurationMs(durationMs);
-        effect.setFps(maxFps);
-        effect.setOverlay(overlay);
-        effect.addAnimationObservers(animationObservers);
-        effect.addCompletionObservers(completionObservers);
+        try {
+            AnimatedSegue effect = segue.newInstance();
+            effect.setSource(theSource);
+            effect.setDestination(theDestination);
+            effect.setDurationMs(durationMs);
+            effect.setFps(maxFps);
+            effect.setOverlay(overlay);
+            effect.addAnimationObservers(animationObservers);
+            effect.addCompletionObservers(completionObservers);
 
-        return effect;
-    }
-
-    private AnimatedSegue getEffect(SegueName name) {
-        switch (name) {
-            case DISSOLVE:
-                return new DissolveEffect();
-            case SCROLL_LEFT:
-                return new ScrollLeftEffect();
-            case SCROLL_RIGHT:
-                return new ScrollRightEffect();
-            case SCROLL_UP:
-                return new ScrollUpEffect();
-            case SCROLL_DOWN:
-                return new ScrollDownEffect();
-            case BARN_DOOR_OPEN:
-                return new BarnDoorOpenEffect();
-            case BARN_DOOR_CLOSE:
-                return new BarnDoorCloseEffect();
-            case WIPE_LEFT:
-                return new WipeLeftEffect();
-            case WIPE_RIGHT:
-                return new WipeRightEffect();
-            case WIPE_UP:
-                return new WipeUpEffect();
-            case WIPE_DOWN:
-                return new WipeDownEffect();
-            case IRIS_OPEN:
-                return new IrisOpenEffect();
-            case IRIS_CLOSE:
-                return new IrisCloseEffect();
-            case ZOOM_IN:
-                return new ZoomInEffect();
-            case ZOOM_OUT:
-                return new ZoomOutEffect();
-            case PLAIN:
-                return new PlainEffect();
-            case STRETCH_FROM_TOP:
-                return new StretchFromTopEffect();
-            case STRETCH_FROM_BOTTOM:
-                return new StretchFromBottomEffect();
-            case STRETCH_FROM_CENTER:
-                return new StretchFromCenterEffect();
-            case SHRINK_TO_BOTTOM:
-                return new ShrinkToBottomEffect();
-            case SHRINK_TO_TOP:
-                return new ShrinkToTopEffect();
-            case SHRINK_TO_CENTER:
-                return new ShrinkToCenterEffect();
-            case VENETIAN_BLINDS:
-                return new BlindsEffect();
-            case CHECKERBOARD:
-                return new CheckerboardEffect();
-
-            default:
-                throw new IllegalArgumentException("Bug! Unhandled visual effect: " + name);
+            return effect;
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new IllegalStateException("Failed to instantiate segue. Verify that it has a public, no-arg constructor.", e);
         }
     }
 

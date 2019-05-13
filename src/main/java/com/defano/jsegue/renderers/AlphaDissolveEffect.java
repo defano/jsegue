@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 /**
  * Cross-dissolve from source to destination.
  */
-public class DissolveEffect extends AnimatedSegue {
+public class AlphaDissolveEffect extends AnimatedSegue {
 
     /** {@inheritDoc} */
     @Override

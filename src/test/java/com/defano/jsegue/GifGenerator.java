@@ -11,7 +11,7 @@ public class GifGenerator {
 
     public static void main(String[] argv) {
 
-        for (SegueName thisName : SegueName.values()) {
+        for (Segue thisName : Segue.values()) {
 
             AnimatedGifEncoder e = new AnimatedGifEncoder();
             e.start("doc/images/" + thisName + ".gif");
@@ -19,12 +19,12 @@ public class GifGenerator {
             e.setTransparent(Color.BLACK);
             e.setRepeat(0);
 
-            forward(thisName, e);
+            forwardThenBackward(thisName, e);
         }
     }
 
-    public static void forward(SegueName name, AnimatedGifEncoder e) {
-        SegueBuilder.of(name)
+    public static void forwardThenBackward(Segue name, AnimatedGifEncoder e) {
+        SegueBuilder.of(name.getSegueClass())
                 .withSource(JSegueDemo.getBlueCircle(SIZE, SIZE))
                 .withDestination(JSegueDemo.getOrangeRect(SIZE, SIZE))
                 .withDuration(1000, TimeUnit.MILLISECONDS)
@@ -36,8 +36,8 @@ public class GifGenerator {
                 .start();
     }
 
-    public static void backward(SegueName name, AnimatedGifEncoder e) {
-        SegueBuilder.of(name)
+    public static void backward(Segue name, AnimatedGifEncoder e) {
+        SegueBuilder.of(name.getSegueClass())
                 .withSource(JSegueDemo.getOrangeRect(SIZE, SIZE))
                 .withDestination(JSegueDemo.getBlueCircle(SIZE, SIZE))
                 .withDuration(1000, TimeUnit.MILLISECONDS)

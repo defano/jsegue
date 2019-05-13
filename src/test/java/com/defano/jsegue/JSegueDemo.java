@@ -12,13 +12,14 @@ import java.util.concurrent.TimeUnit;
 public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserver {
 
     private AnimatedSegue effect;
-    private SegueName name;
+    private Segue name;
 
     private JFrame frame;
     private JLabel image;
     private JCheckBox blend;
     private JComboBox effectSelection;
     private JPanel demoPanel;
+    private JSlider progressSlider;
 
     public static void main(String[] argc) {
         new JSegueDemo();
@@ -30,31 +31,39 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
         frame.setLayout(new BorderLayout());
         frame.setPreferredSize(new Dimension(300, 300));
         frame.pack();
-        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         frame.add(demoPanel);
+        frame.setVisible(true);
+
         image.setSize(150, 150);
 
-        ComboBoxModel effectNames = new DefaultComboBoxModel<>(SegueName.values());
+        ComboBoxModel effectNames = new DefaultComboBoxModel<>(Segue.values());
         effectSelection.setModel(effectNames);
         effectSelection.addActionListener(e -> {
-            run((SegueName) effectSelection.getSelectedItem());
+            run((Segue) effectSelection.getSelectedItem());
         });
 
         blend.addActionListener(e -> run(name));
 
-        run(SegueName.DISSOLVE);
+        progressSlider.addChangeListener(e -> {
+            effect.stop();
+            onFrameRendered(effect, effect.render(getBlueCircle(image.getWidth(), image.getHeight()),
+                    getOrangeRect(image.getWidth(), image.getHeight()),
+                    (float) progressSlider.getValue() / 100f));
+        });
+
+        run(Segue.PIXEL_DISSOLVE);
     }
 
-    private void run(SegueName name) {
+    private void run(Segue name) {
         this.name = name;
 
         if (effect != null) {
             effect.stop();
         }
 
-        effect = SegueBuilder.of(name)
+        effect = SegueBuilder.of(name.getSegueClass())
                 .withSource(getBlueCircle(image.getWidth(), image.getHeight()))
                 .withDestination(getOrangeRect(image.getWidth(), image.getHeight()))
                 .withDuration(1000, TimeUnit.MILLISECONDS)
@@ -119,19 +128,24 @@ public class JSegueDemo implements SegueAnimationObserver, SegueCompletionObserv
      */
     private void $$$setupUI$$$() {
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(1, 1, new Insets(10, 10, 10, 10), -1, -1));
         demoPanel = new JPanel();
-        demoPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
+        demoPanel.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
         panel1.add(demoPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         image = new JLabel();
         image.setText("");
-        demoPanel.add(image, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        demoPanel.add(image, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         blend = new JCheckBox();
         blend.setText("Blend");
         demoPanel.add(blend, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         effectSelection = new JComboBox();
         demoPanel.add(effectSelection, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
-        demoPanel.add(spacer1, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        demoPanel.add(spacer1, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        progressSlider = new JSlider();
+        progressSlider.setMajorTickSpacing(20);
+        progressSlider.setMinorTickSpacing(5);
+        progressSlider.setPaintTicks(true);
+        demoPanel.add(progressSlider, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 }
