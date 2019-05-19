@@ -5,7 +5,7 @@ import com.defano.jsegue.AnimatedSegue;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class AbstractShrinkEffect extends AnimatedSegue {
+public abstract class AbstractShrinkEffect extends AnimatedSegue {
 
     public enum ShrinkDirection {
         TO_TOP, TO_BOTTOM, FROM_CENTER
