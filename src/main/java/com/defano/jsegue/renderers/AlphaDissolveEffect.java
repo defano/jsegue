@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Cross-dissolve from source to destination.
+ * Cross-dissolve from source to destination by increasing the source transparency while reducing the destination's.
  */
 public class AlphaDissolveEffect extends AnimatedSegue {
 

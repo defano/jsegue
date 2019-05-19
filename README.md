@@ -51,7 +51,7 @@ JSegue is published to Maven Central; include the library in your Maven project'
 <dependency>
   <groupId>com.defano.jsegue</groupId>
   <artifactId>jsegue</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
 </dependency>
 ```
 
@@ -63,7 +63,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.defano.jsegue:jsegue:0.0.2'
+  compile 'com.defano.jsegue:jsegue:0.0.3'
 }
 ```
 

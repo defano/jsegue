@@ -5,6 +5,9 @@ import com.defano.jsegue.AnimatedSegue;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * Cross-dissolve from source to destination by randomly replacing source pixels with destination pixels.
+ */
 @SuppressWarnings("unused")
 public class PixelDissolveEffect extends AnimatedSegue {
 
