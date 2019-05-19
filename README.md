@@ -6,39 +6,40 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 
 ## Features
 
-* 23 animations for transitioning one image to another including cross-dissolve, wipe, scroll, zoom, and checkerboard effects. May be used to generate realtime animations or to render frames offline (in batch).
+* 24 animations for transitioning one image to another including cross-dissolve, wipe, scroll, zoom, and checkerboard effects. May be used to generate realtime animations or to render frames offline (in batch).
 * May substitute a `Paint` for either source or destination image for effects like fade-to-black.
 * Configurable animation duration, frames-per-second and alpha blending.
-* Simple to use and integrate; lightweight library with no transitive dependencies.
+* Simple to use and integrate; lightweight library with no transitive dependencies (approx. 40KB in size).
 
-## Segues
+## Animated Segues
 
-| Effect | Name           | Description
-|-|-----------------------|--------------------------
-|![DISSOLVE](doc/images/DISSOLVE.gif)| `DISSOLVE`            | Cross-dissolve from source to destination.
-|![CHECKERBOARD](doc/images/CHECKERBOARD.gif)| `CHECKERBOARD`        | Destination image appears over the source in a 8x8 matrix.
-|![VENETIAN_BLINDS](doc/images/VENETIAN_BLINDS.gif)| `VENETIAN_BLINDS`     | Destination appears in "louvered" horizontal stripes.
-|![SCROLL_LEFT](doc/images/SCROLL_LEFT.gif)| `SCROLL_LEFT`         | Scroll from right to left.
-|![SCROLL_RIGHT](doc/images/SCROLL_RIGHT.gif)| `SCROLL_RIGHT`        | Scroll from left to right.
-|![SCROLL_UP](doc/images/SCROLL_UP.gif)| `SCROLL_UP`           | Scroll from bottom to top.
-|![SCROLL_DOWN](doc/images/SCROLL_DOWN.gif)| `SCROLL_DOWN`         | Scroll from top to bottom.
-|![WIPE_LEFT](doc/images/WIPE_LEFT.gif)| `WIPE_LEFT`           | Slides the destination image over the source from right to left.
-|![WIPE_RIGHT](doc/images/WIPE_RIGHT.gif)| `WIPE_RIGHT`          | Slides the destination image over the source from left to right.
-|![WIPE_UP](doc/images/WIPE_UP.gif)| `WIPE_UP`             | Slides the destination image over the source from bottom to top.
-|![WIPE_DOWN](doc/images/WIPE_DOWN.gif)| `WIPE_DOWN`           | Slides the destination image over the source from top to bottom.
-|![ZOOM_OUT](doc/images/ZOOM_OUT.gif)| `ZOOM_OUT`            | The destination image expands over the source in a rectangle aperture.
-|![ZOOM_IN](doc/images/ZOOM_IN.gif)| `ZOOM_IN`             | The source image collapses over the destination in a rectangle aperture.
-|![IRIS_OPEN](doc/images/IRIS_OPEN.gif)| `IRIS_OPEN`           | The destination image expands over the source in a circular aperture.
-|![IRIS_CLOSE](doc/images/IRIS_CLOSE.gif)| `IRIS_CLOSE`          | The source image collapses over the destination in a circular aperture.
-|![BARN_DOOR_OPEN](doc/images/BARN_DOOR_OPEN.gif)| `BARN_DOOR_OPEN`      | The source image is split horizontally and each side slides out left/right to expose the destination.
-|![BARN_DOOR_CLOSE](doc/images/BARN_DOOR_CLOSE.gif)| `BARN_DOOR_CLOSE`     | The destination image slides in the from the left/right obscuring the source image.
-|![SHRINK_TO_BOTTOM](doc/images/SHRINK_TO_BOTTOM.gif)| `SHRINK_TO_BOTTOM`    | The source image shrinks downward exposing the destination.
-|![SHRINK_TO_TOP](doc/images/SHRINK_TO_TOP.gif)| `SHRINK_TO_TOP`       | The source image shrinks upward exposing the destination.
-|![SHRINK_TO_CENTER](doc/images/SHRINK_TO_CENTER.gif)| `SHRINK_TO_CENTER`    | The source image shrinks from the center of the screen exposing the destination.
-|![STRETCH_FROM_BOTTOM](doc/images/STRETCH_FROM_BOTTOM.gif)| `STRETCH_FROM_BOTTOM` | The destination image grows from the bottom obscuring the source underneath it.
-|![STRETCH_FROM_TOP](doc/images/STRETCH_FROM_TOP.gif)| `STRETCH_FROM_TOP`    | The destination image grows from the top obscuring the source underneath it.
-|![STRETCH_FROM_CENTER](doc/images/STRETCH_FROM_CENTER.gif)| `STRETCH_FROM_CENTER` | The destination image grows from the center of the screen obscuring the source underneath it.
-|![PLAIN](doc/images/PLAIN.gif)| `PLAIN`               | A no-op transition that simply renders the source image.
+| Animated Segue | Name           | Description
+|----------------|----------------|-------------------------------------
+|![AlphaDissolveEffect](doc/images/AlphaDissolveEffect.gif)         | `AlphaDissolveEffect`     | Cross-dissolve from source to destination by increasing the source transparency while reducing the destination's.
+|![PixelDissolveEffect](doc/images/PixelDissolveEffect.gif)         | `PixelDissolveEffect`     | Cross-dissolve from source to destination by randomly replacing source pixels with destination pixels.
+|![CheckerboardEffect](doc/images/CheckerboardEffect.gif)           | `CheckerboardEffect`      | Destination image appears over the source in a 8x8 matrix.
+|![BlindsEffect](doc/images/BlindsEffect.gif)                       | `BlindsEffect`            | Destination appears in "louvered" horizontal stripes.
+|![ScrollLeftEffect](doc/images/ScrollLeftEffect.gif)               | `ScrollLeftEffect`        | Scroll from right to left.
+|![ScrollRightEffect](doc/images/ScrollRightEffect.gif)             | `ScrollRightEffect`       | Scroll from left to right.
+|![ScrollUpEffect](doc/images/ScrollUpEffect.gif)                   | `ScrollUpEffect`          | Scroll from bottom to top.
+|![ScrollDownEffect](doc/images/ScrollDownEffect.gif)               | `ScrollDownEffect`        | Scroll from top to bottom.
+|![WipeLeftEffect](doc/images/WipeLeftEffect.gif)                   | `WipeLeftEffect`          | Slides the destination image over the source from right to left.
+|![WipeRightEffect](doc/images/WipeRightEffect.gif)                 | `WipeRightEffect`         | Slides the destination image over the source from left to right.
+|![WipeUpEffect](doc/images/WipeUpEffect.gif)                       | `WipeUpEffect`            | Slides the destination image over the source from bottom to top.
+|![WipeDownEffect](doc/images/WipeDownEffect.gif)                   | `WipeDownEffect`          | Slides the destination image over the source from top to bottom.
+|![ZoomOutEffect](doc/images/ZoomOutEffect.gif)                     | `ZoomOutEffect`           | The destination image expands over the source in a rectangle aperture.
+|![ZoomInEffect](doc/images/ZoomInEffect.gif)                       | `ZoomInEffect`            | The source image collapses over the destination in a rectangle aperture.
+|![IrisOpenEffect](doc/images/IrisOpenEffect.gif)                   | `IrisOpenEffect`          | The destination image expands over the source in a circular aperture.
+|![IrisCloseEffect](doc/images/IrisCloseEffect.gif)                 | `IrisCloseEffect`         | The source image collapses over the destination in a circular aperture.
+|![BarnDoorOpenEffect](doc/images/BarnDoorOpenEffect.gif)           | `BarnDoorOpenEffect`      | The source image is split horizontally and each side slides out left/right to expose the destination.
+|![BarnDoorCloseEffect](doc/images/BarnDoorCloseEffect.gif)         | `BarnDoorCloseEffect`     | The destination image slides in the from the left/right obscuring the source image.
+|![ShrinkToBottomEffect](doc/images/ShrinkToBottomEffect.gif)       | `ShrinkToBottomEffect`    | The source image shrinks downward exposing the destination.
+|![ShrinkToTopEffect](doc/images/ShrinkToTopEffect.gif)             | `ShrinkToTopEffect`       | The source image shrinks upward exposing the destination.
+|![ShrinkToCenterEffect](doc/images/ShrinkToCenterEffect.gif)       | `ShrinkToCenterEffect`    | The source image shrinks from the center of the screen exposing the destination.
+|![StretchFromBottomEffect](doc/images/StretchFromBottomEffect.gif) | `StretchFromBottomEffect` | The destination image grows from the bottom obscuring the source underneath it.
+|![StretchFromTopEffect](doc/images/StretchFromTopEffect.gif)       | `StretchFromTopEffect`    | The destination image grows from the top obscuring the source underneath it.
+|![StretchFromCenterEffect](doc/images/StretchFromCenterEffect.gif) | `StretchFromCenterEffect` | The destination image grows from the center of the screen obscuring the source underneath it.
+|![PlainEffect](doc/images/PlainEffect.gif)                         | `PlainEffect`             | A no-op transition that simply renders the source image.
 
 ## Getting Started
 
@@ -48,9 +49,9 @@ JSegue is published to Maven Central; include the library in your Maven project'
 
 ```
 <dependency>
-    <groupId>com.defano.jsegue</groupId>
-    <artifactId>jsegue</artifactId>
-    <version>0.0.1</version>
+  <groupId>com.defano.jsegue</groupId>
+  <artifactId>jsegue</artifactId>
+  <version>0.0.2</version>
 </dependency>
 ```
 
@@ -58,11 +59,11 @@ JSegue is published to Maven Central; include the library in your Maven project'
 
 ```
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-  compile 'com.defano.jsegue:jsegue:0.0.1'
+  compile 'com.defano.jsegue:jsegue:0.0.2'
 }
 ```
 
@@ -92,7 +93,7 @@ public class MyClass implements SegueAnimationObserver {
   BufferedImage myDestination = ... ;
 
   // Create a cross-dissolve segue
-  AnimatedSegue mySegue = SegueBuilder.of(SegueName.DISSOLVE)
+  AnimatedSegue mySegue = SegueBuilder.of(BlindsEffect.class)
     .withSource(mySource)
     .withDestination(myDestination)
     .withDuration(1500, TimeUnit.MILLISECONDS)      // Animation lasts 1.5 seconds
@@ -115,7 +116,7 @@ Use the `Paint` form of the `withSource()` and `withDestination()` methods in th
 For example, to fade an image to black:
 
 ```
-SegueBuilder.of(SegueName.DISSOLVE)
+SegueBuilder.of(AlphaDissolveEffect.class)
   .withSource(myImage)
   .withDestination(Color.BLACK)
   ...
@@ -125,7 +126,7 @@ SegueBuilder.of(SegueName.DISSOLVE)
 Or, to make an image appear using a zoom effect:
 
 ```
-SegueBuilder.of(SegueName.ZOOM_IN)
+SegueBuilder.of(ZoomInEffect.class)
   .withSource(new Color(0, 0, 0, 0))     // Transparent color
   .withDestination(myImage)
   ...
@@ -149,7 +150,7 @@ However, if you create a segue using `SegueBuilder`, the builder will automatica
 Yes, but... This library does not manage segue sequences for you. But you can achieve this effect by registering yourself as an observer of animation completion. At the completion of each segue you can immediate start the next one in your sequence.
 
 ```
-SegueBuilder.of(SegueName.ZOOM_IN)
+SegueBuilder.of(ZoomInEffect.class)
   .withSource(new Color(0, 0, 0, 0))    // Fully transparent
   .withDestination(myImage)
   .withCompletionObserver(segue -> startNextSegueInSequence())
