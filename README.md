@@ -9,7 +9,7 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 * 24 animations for transitioning one image to another including cross-dissolve, wipe, scroll, zoom, and checkerboard effects. May be used to generate realtime animations or to render frames offline (in batch).
 * May substitute a `Paint` for either source or destination image for effects like fade-to-black.
 * Configurable animation duration, frames-per-second and alpha blending.
-* Simple to use and integrate; lightweight library with no transitive dependencies.
+* Simple to use and integrate; lightweight library with no transitive dependencies (approx. 40KB in size).
 
 ## Animated Segues
 
@@ -17,7 +17,7 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 |----------------|----------------|-------------------------------------
 |![AlphaDissolveEffect](doc/images/AlphaDissolveEffect.gif)         | `AlphaDissolveEffect`     | Cross-dissolve from source to destination by increasing the source transparency while reducing the destination's.
 |![PixelDissolveEffect](doc/images/PixelDissolveEffect.gif)         | `PixelDissolveEffect`     | Cross-dissolve from source to destination by randomly replacing source pixels with destination pixels.
-|![CheckerboardEffect](doc/images/CheckerboardEffect.gif)           | `CheckerboardEffect`        | Destination image appears over the source in a 8x8 matrix.
+|![CheckerboardEffect](doc/images/CheckerboardEffect.gif)           | `CheckerboardEffect`      | Destination image appears over the source in a 8x8 matrix.
 |![BlindsEffect](doc/images/BlindsEffect.gif)                       | `BlindsEffect`            | Destination appears in "louvered" horizontal stripes.
 |![ScrollLeftEffect](doc/images/ScrollLeftEffect.gif)               | `ScrollLeftEffect`        | Scroll from right to left.
 |![ScrollRightEffect](doc/images/ScrollRightEffect.gif)             | `ScrollRightEffect`       | Scroll from left to right.
@@ -49,9 +49,9 @@ JSegue is published to Maven Central; include the library in your Maven project'
 
 ```
 <dependency>
-    <groupId>com.defano.jsegue</groupId>
-    <artifactId>jsegue</artifactId>
-    <version>0.0.1</version>
+  <groupId>com.defano.jsegue</groupId>
+  <artifactId>jsegue</artifactId>
+  <version>0.0.2</version>
 </dependency>
 ```
 
@@ -59,11 +59,11 @@ JSegue is published to Maven Central; include the library in your Maven project'
 
 ```
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-  compile 'com.defano.jsegue:jsegue:0.0.1'
+  compile 'com.defano.jsegue:jsegue:0.0.2'
 }
 ```
 
