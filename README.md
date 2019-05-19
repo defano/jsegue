@@ -17,7 +17,7 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 |----------------|----------------|-------------------------------------
 |![AlphaDissolveEffect](doc/images/AlphaDissolveEffect.gif)         | `AlphaDissolveEffect`     | Cross-dissolve from source to destination by increasing the source transparency while reducing the destination's.
 |![PixelDissolveEffect](doc/images/PixelDissolveEffect.gif)         | `PixelDissolveEffect`     | Cross-dissolve from source to destination by randomly replacing source pixels with destination pixels.
-|![CheckboardEffect](doc/images/CheckboardEffect.gif)               | `CheckboardEffect`        | Destination image appears over the source in a 8x8 matrix.
+|![CheckerboardEffect](doc/images/CheckerboardEffect.gif)           | `CheckerboardEffect`        | Destination image appears over the source in a 8x8 matrix.
 |![BlindsEffect](doc/images/BlindsEffect.gif)                       | `BlindsEffect`            | Destination appears in "louvered" horizontal stripes.
 |![ScrollLeftEffect](doc/images/ScrollLeftEffect.gif)               | `ScrollLeftEffect`        | Scroll from right to left.
 |![ScrollRightEffect](doc/images/ScrollRightEffect.gif)             | `ScrollRightEffect`       | Scroll from left to right.
