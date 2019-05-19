@@ -21,7 +21,7 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 |![BlindsEffect](doc/images/BlindsEffect.gif)                       | `BlindsEffect`            | Destination appears in "louvered" horizontal stripes.
 |![ScrollLeftEffect](doc/images/ScrollLeftEffect.gif)               | `ScrollLeftEffect`        | Scroll from right to left.
 |![ScrollRightEffect](doc/images/ScrollRightEffect.gif)             | `ScrollRightEffect`       | Scroll from left to right.
-|![ScrillUpEffect](doc/images/ScrillUpEffect.gif)                   | `ScrillUpEffect`          | Scroll from bottom to top.
+|![ScrollUpEffect](doc/images/ScrollUpEffect.gif)                   | `ScrollUpEffect`          | Scroll from bottom to top.
 |![ScrollDownEffect](doc/images/ScrollDownEffect.gif)               | `ScrollDownEffect`        | Scroll from top to bottom.
 |![WipeLeftEffect](doc/images/WipeLeftEffect.gif)                   | `WipeLeftEffect`          | Slides the destination image over the source from right to left.
 |![WipeRightEffect](doc/images/WipeRightEffect.gif)                 | `WipeRightEffect`         | Slides the destination image over the source from left to right.
