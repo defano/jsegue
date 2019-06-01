@@ -48,7 +48,7 @@ public abstract class AnimatedSegue {
      *
      * @return ScheduledFuture representing the future completion of the animation sequence
      */
-    public ScheduledFuture<?> start() {
+    public ScheduledFuture start() {
         startTime = System.currentTimeMillis();
 
         // Assure that 0 is always first render progress percent
@@ -136,6 +136,7 @@ public abstract class AnimatedSegue {
      * @param observer The observer destination remove.
      * @return True if the given observer exists in the registered list of observers and was removed; false otherwise.
      */
+    @SuppressWarnings("UnusedReturnValue")
     public boolean removeAnimationObserver(SegueAnimationObserver observer) {
         return this.animationObserver.remove(observer);
     }
@@ -146,6 +147,7 @@ public abstract class AnimatedSegue {
      * @param observer The observer destination remove.
      * @return True if the given observer exists in the registered list of observers and was removed; false otherwise.
      */
+    @SuppressWarnings("UnusedReturnValue")
     public boolean removeCompletionObserver(SegueCompletionObserver observer) {
         return this.completionObserver.remove(observer);
     }
@@ -246,20 +248,27 @@ public abstract class AnimatedSegue {
     }
 
     private void fireFrameRendered(BufferedImage image) {
-        for (SegueAnimationObserver thisObserver : animationObserver) {
+        for (SegueAnimationObserver thisObserver : animationObserver.toArray(new SegueAnimationObserver[0])) {
             thisObserver.onFrameRendered(this, image);
         }
     }
 
     private void fireCompleted() {
-        for (SegueCompletionObserver thisObserver : completionObserver) {
+        for (SegueCompletionObserver thisObserver : completionObserver.toArray(new SegueCompletionObserver[0])) {
             thisObserver.onSegueAnimationCompleted(this);
         }
     }
 
     private float getProgress() {
         float progress = ((float) (System.currentTimeMillis() - startTime) / (float) durationMs);
-        return progress < 0f ? 0f : progress > 1.0f ? 1.0f : progress;
+
+        if (progress < 0f) {
+            return 0f;
+        } else if (progress > 1.0f) {
+            return 1.0f;
+        }
+
+        return progress;
     }
 
     private void assertImages() {
