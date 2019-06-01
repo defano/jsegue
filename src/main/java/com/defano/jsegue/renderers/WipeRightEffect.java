@@ -3,7 +3,6 @@ package com.defano.jsegue.renderers;
 import com.defano.jsegue.AnimatedSegue;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
@@ -19,20 +18,10 @@ public class WipeRightEffect extends AnimatedSegue {
 
         // Calculate wipe distance
         int distance = Math.min(src.getWidth() - 1, (int) (progress * src.getWidth()));
+        BufferedImage sub = src.getSubimage(distance, 0, src.getWidth() - distance, src.getHeight());
 
-        if (!isOverlay()) {
-            // Truncate the from image (it's getting wiped)
-            BufferedImage wiped = src.getSubimage(distance, 0, src.getWidth() - distance, src.getHeight());
-            g.drawImage(wiped, distance, 0, null);
-        } else {
-            g.drawImage(src, 0, 0, null);
-        }
-
-        // Slide the to image atop the truncated portion of the from image
-        AffineTransform toTranslate = new AffineTransform();
-        toTranslate.translate( -dst.getWidth() + distance, 0);
-        g.setTransform(toTranslate);
         g.drawImage(dst, 0, 0, null);
+        g.drawImage(sub, distance, 0, null);
 
         return frame;
     }
