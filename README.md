@@ -15,7 +15,8 @@ A Java library of animated image-to-image transitions useful for slide shows, ph
 
 | Animated Segue | Name           | Description
 |----------------|----------------|-------------------------------------
-|![AlphaDissolveEffect](doc/images/AlphaDissolveEffect.gif)         | `AlphaDissolveEffect`     | Cross-dissolve from source to destination by increasing the source transparency while reducing the destination's.
+|![Test](doc/images/1.gif)         | `Test`     | Test
+|![Test](doc/images/2.gif)         | `Test`     | Test
 |![PixelDissolveEffect](doc/images/PixelDissolveEffect.gif)         | `PixelDissolveEffect`     | Cross-dissolve from source to destination by randomly replacing source pixels with destination pixels.
 |![CheckerboardEffect](doc/images/CheckerboardEffect.gif)           | `CheckerboardEffect`      | Destination image appears over the source in a 8x8 matrix.
 |![BlindsEffect](doc/images/BlindsEffect.gif)                       | `BlindsEffect`            | Destination appears in "louvered" horizontal stripes.
@@ -67,45 +68,6 @@ dependencies {
 }
 ```
 
-#### 2. Make your class react to animation changes:
-
-As your animation runs, JSegue will notify you that a new animation frame is ready to be displayed. Typically you'll place this image into some component visible to the user:
-
-```
-public class MyClass implements SegueAnimationObserver {
-
-  private JLabel myDisplay;
-
-  ...
-
-  @Override
-  void onFrameRendered(AnimatedSegue segue, BufferedImage image) {
-    myDisplay.setIcon(new ImageIcon(image));
-  }  
-
-}
-```
-
-#### 3. Build an animation:
-
-```
-  BufferedImage mySource = ... ;
-  BufferedImage myDestination = ... ;
-
-  // Create a cross-dissolve segue
-  AnimatedSegue mySegue = SegueBuilder.of(BlindsEffect.class)
-    .withSource(mySource)
-    .withDestination(myDestination)
-    .withDuration(1500, TimeUnit.MILLISECONDS)      // Animation lasts 1.5 seconds
-    .withMaxFramesPerSecond(30)                     // No more than 30fps
-    .withAnimationObserver(this)                    // Make this class an observer
-    .alphaBlend(true)                               // Overlay images; see FAQs
-    .build()
-
-  // Kick it off...
-  mySegue.start();
-
-```
 
 ## Frequently Asked Questions
 
